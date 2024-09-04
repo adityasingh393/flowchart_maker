@@ -6,20 +6,18 @@ import {
   OnSelectionChangeFunc,
 } from "@xyflow/react";
 import { useCallback, useState } from "react";
+
 const useEdges = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [selectedEdges, setSelectedEdges] = useState<string[]>([]);
-  const [lineSelectionMode, setLineSelectionMode] = useState(false);
+  const [selectedEdgeType, setSelectedEdgeType] = useState<"default" | "straight" | "step" | "smoothstep">("default");
 
   const onConnect = useCallback(
     (edge: Edge | Connection) => {
-      if (lineSelectionMode) {
-        const newEdges = addEdge(edge, edges);
-        setEdges(newEdges);
-        setLineSelectionMode(false);
-      }
+      const newEdge = { ...edge, type: selectedEdgeType };
+      setEdges((eds) => addEdge(newEdge, eds));
     },
-    [edges, lineSelectionMode]
+    [edges, selectedEdgeType]
   );
 
   const onEdgesDelete = useCallback(
@@ -39,9 +37,12 @@ const useEdges = () => {
     setSelectedEdges([]);
   };
 
-  const handleSelectLines = useCallback(() => {
-    setLineSelectionMode(true);
-  }, []);
+  const handleEdgeTypeChange = useCallback(
+    (type: "default" | "straight" | "step" | "smoothstep") => {
+      setSelectedEdgeType(type);
+    },
+    []
+  );
 
   return {
     edges,
@@ -50,7 +51,8 @@ const useEdges = () => {
     onEdgesDelete,
     onSelectionChange,
     deleteSelectedEdges,
-    handleSelectLines,
+    selectedEdgeType,
+    handleEdgeTypeChange,
   };
 };
 

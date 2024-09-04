@@ -19,7 +19,7 @@ const Flow: React.FC = () => {
     onConnect,
     onEdgesDelete,
     onSelectionChange,
-    handleSelectLines,
+    handleEdgeTypeChange,
   } = useEdges();
 
   const addDefaultNodeHandler = () => handleAddNode(nodes, setNodes, "default");
@@ -32,7 +32,7 @@ const Flow: React.FC = () => {
         onAddDefaultNode={addDefaultNodeHandler}
         onAddCircleNode={addCircleNodeHandler}
         onAddDiamondNode={addDiamondNodeHandler}
-        onSelectLines={handleSelectLines}
+        onEdgeTypeChange={handleEdgeTypeChange}
       />
       <div className="flowConatiner">
         <ReactFlow
@@ -44,10 +44,10 @@ const Flow: React.FC = () => {
           onEdgesDelete={onEdgesDelete}
           onSelectionChange={onSelectionChange}
           nodeTypes={{ diamond: DiamondNode, oval: CircularNode }}
-          // defaultEdgeOptions={{ type: 'smoothstep' }}
+          defaultEdgeOptions={{animated:true}}
         >
           <Controls />
-          <Background color="blue" gap={6} />
+          <Background color="orange" gap={6} />
         </ReactFlow>
       </div>
     </div>
