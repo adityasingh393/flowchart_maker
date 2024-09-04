@@ -6,19 +6,16 @@ import {
   OnSelectionChangeFunc,
 } from "@xyflow/react";
 import { useCallback, useState } from "react";
-// type Edge={
-//     id:string
-// }
 const useEdges = () => {
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [selectedEdges, setSelectedEdges] = useState<string[]>([]);
   const [lineSelectionMode, setLineSelectionMode] = useState(false);
 
   const onConnect = useCallback(
     (edge: Edge | Connection) => {
       if (lineSelectionMode) {
-        const newEdge = addEdge(edge, edges);
-        setEdges(newEdge);
+        const newEdges = addEdge(edge, edges);
+        setEdges(newEdges);
         setLineSelectionMode(false);
       }
     },
