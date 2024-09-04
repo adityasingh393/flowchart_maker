@@ -18,22 +18,22 @@ const CircularNode = ({ id, data }: any) => {
       <Handle
         type="source"
         position={Position.Top}
-        style={{ top: -5, left: "50%", transform: "translateX(-50%)" }}
-      />
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        style={{ bottom: -5, left: "50%", transform: "translateX(-50%)" }}
+        style={{
+          top: -4,
+          left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "green",
+        }}
       />
       <Handle
         type="target"
         position={Position.Left}
-        style={{ top: "50%", left: -5, transform: "translateY(-50%)" }}
-      />
-      <Handle
-        type="target"
-        position={Position.Right}
-        style={{ top: "50%", right: -5, transform: "translateY(-50%)" }}
+        style={{
+          top: 91,
+          left: 100,
+          transform: "translateY(-50%)",
+          backgroundColor: "red",
+        }}
       />
     </div>
   );

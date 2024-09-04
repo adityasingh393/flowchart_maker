@@ -10,7 +10,7 @@ const DiamondNode = ({ id, data }: any) => {
         border: "1px solid",
         display: "flex",
         alignItems: "center",
-        backgroundColor:'white',
+        backgroundColor: "white",
         justifyContent: "center",
       }}
     >
@@ -26,32 +26,18 @@ const DiamondNode = ({ id, data }: any) => {
         type="source"
         position={Position.Top}
         style={{
-            top: -4,
-            left: "50%",
-        }}
-      />
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        style={{
-            bottom: -4,
-            left: "50%",
+          top: -1,
+          left: -2,
+          backgroundColor:'darkgreen'
         }}
       />
       <Handle
         type="target"
         position={Position.Left}
         style={{
-            top: "50%",
-            left: -4,
-        }}
-      />
-      <Handle
-        type="target"
-        position={Position.Right}
-        style={{
-            top: "50%",
-            right: -4,     
+          top: 100,
+          left: 100,
+          backgroundColor:'red'
         }}
       />
     </div>
