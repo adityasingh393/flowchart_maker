@@ -1,7 +1,7 @@
 import { Handle, Position } from "@xyflow/react";
 import { useState } from "react";
 
-const CircularNode = ({ id, data }: any) => {
+const ReactangularNode = ({ id, data }: any) => {
   const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,14 +12,14 @@ const CircularNode = ({ id, data }: any) => {
   return (
     <div
       style={{
-        width: 200,
-        height: 90,
-        borderRadius: "50%",
+        width: 150,
+        height: 80,
         border: "1px solid black",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
+        position: "relative",
       }}
     >
       <input
@@ -28,18 +28,17 @@ const CircularNode = ({ id, data }: any) => {
         onChange={handleLabelChange}
         style={{
           border: "none",
-          height:"40%",
-          width:"60%",
-          background: "transparent",
-          outline:"none",
           textAlign: "center",
+          width: "90%",
+          backgroundColor: "transparent",
+          outline: "none",     
         }}
       />
       <Handle
         type="source"
         position={Position.Top}
         style={{
-          top: -4,
+          top: -5,
           left: "50%",
           transform: "translateX(-50%)",
           backgroundColor: "green",
@@ -47,11 +46,11 @@ const CircularNode = ({ id, data }: any) => {
       />
       <Handle
         type="target"
-        position={Position.Left}
+        position={Position.Bottom}
         style={{
-          top: 91,
-          left: 100,
-          transform: "translateY(-50%)",
+          bottom: -5,
+          left: "50%",
+          transform: "translateX(-50%)",
           backgroundColor: "red",
         }}
       />
@@ -59,4 +58,4 @@ const CircularNode = ({ id, data }: any) => {
   );
 };
 
-export default CircularNode;
+export default ReactangularNode;

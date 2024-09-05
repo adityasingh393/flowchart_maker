@@ -3,16 +3,16 @@ import { CustomNode, SetNodesFunction } from "../../types/types";
 export const createNewNode = (
   nodes: CustomNode[],
   setNodes: SetNodesFunction,
-  shape: "default" | "circle" | "diamond" | "oval"
+  shape: "rectangel" | "diamond" | "oval" | "comment"
 ) => {
   const newNodeId = Date.now().toString();
 
   let newNode: CustomNode;
 
-  if (shape === "default") {
+  if (shape === "rectangel") {
     newNode = {
       id: newNodeId,
-      type: "default",
+      type: "rectangel",
       position: { x: 400, y: Math.random() * 600 },
       data: { label: `Default Node ${newNodeId}` },
     };
@@ -30,6 +30,13 @@ export const createNewNode = (
       position: { x: 400, y: Math.random() * 600 },
       data: { label: `Diamond Node ${newNodeId}` },
     };
+  } else if (shape === "comment") {
+    newNode = {
+      id: newNodeId,
+      type: "comment",
+      position: { x: 400, y: 400 },
+      data: { label: `comment Node` },
+    };
   }
 
   setNodes((nds) => [...nds, newNode]);
@@ -38,7 +45,7 @@ export const createNewNode = (
 export const handleAddNode = (
   nodes: CustomNode[],
   setNodes: SetNodesFunction,
-  shape: "default" |  "diamond" | "oval"
+  shape: "rectangel" | "diamond" | "oval" | "comment"
 ) => {
   createNewNode(nodes, setNodes, shape);
 };

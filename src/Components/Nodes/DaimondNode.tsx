@@ -1,6 +1,14 @@
 import { Handle, Position } from "@xyflow/react";
+import { useState } from "react";
 
 const DiamondNode = ({ id, data }: any) => {
+  const [label, setLabel] = useState(data.label);
+
+  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLabel(e.target.value);
+    data.onChange(id, e.target.value);
+  };
+
   return (
     <div
       style={{
@@ -20,7 +28,19 @@ const DiamondNode = ({ id, data }: any) => {
           textAlign: "center",
         }}
       >
-        {data.label}
+        <input
+          type="text"
+          value={label}
+          onChange={handleLabelChange}
+          style={{
+            border:"none",
+            height: "100%",
+            outline:"none",
+            width: "90%",
+            background: "transparent",
+            textAlign: "center",
+          }}
+        />
       </div>
       <Handle
         type="source"
@@ -28,7 +48,7 @@ const DiamondNode = ({ id, data }: any) => {
         style={{
           top: -1,
           left: -2,
-          backgroundColor:'darkgreen'
+          backgroundColor: "darkgreen",
         }}
       />
       <Handle
@@ -37,7 +57,7 @@ const DiamondNode = ({ id, data }: any) => {
         style={{
           top: 100,
           left: 100,
-          backgroundColor:'red'
+          backgroundColor: "red",
         }}
       />
     </div>

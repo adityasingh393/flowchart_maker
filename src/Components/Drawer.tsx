@@ -7,13 +7,15 @@ const Drawer: React.FC<CustomDrawerProps> = ({
   onAddCircleNode,
   onAddDiamondNode,
   onEdgeTypeChange,
+  onAddCommentNode
 }) => {
   return (
     <div className="drawer">
       <h3>Nodes </h3>
-      <button onClick={onAddDefaultNode}>Add Default Node</button>
+      <button onClick={onAddDefaultNode}>Add Rectangular Node</button>
       <button onClick={onAddCircleNode}>Add Oval Node</button>
       <button onClick={onAddDiamondNode}>Add Diamond Node</button>
+      <button onClick={onAddCommentNode}>Add Comment</button>
       <div className="edges">
         <h3>Choose an edge </h3>
         <button onClick={() => onEdgeTypeChange("default")}>
@@ -26,6 +28,7 @@ const Drawer: React.FC<CustomDrawerProps> = ({
         <button onClick={() => onEdgeTypeChange("smoothstep")}>
           Smooth Step Edge
         </button>
+
       </div>
     </div>
   );

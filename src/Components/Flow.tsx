@@ -8,6 +8,8 @@ import DiamondNode from "./Nodes/DaimondNode";
 import { CustomNode } from "../types/types";
 import "../Styles/flow.css";
 import CircularNode from "./Nodes/CircularNode";
+import CommentNode from "./Nodes/Comment";
+import ReactangularNode from "./Nodes/ReactangularNode";
 
 const initialNodes: CustomNode[] = [];
 
@@ -22,17 +24,20 @@ const Flow: React.FC = () => {
     handleEdgeTypeChange,
   } = useEdges();
 
-  const addDefaultNodeHandler = () => handleAddNode(nodes, setNodes, "default");
+  const addRectangelNodeHandler = () =>
+    handleAddNode(nodes, setNodes, "rectangel");
   const addCircleNodeHandler = () => handleAddNode(nodes, setNodes, "oval");
   const addDiamondNodeHandler = () => handleAddNode(nodes, setNodes, "diamond");
+  const addCommentNodeHandler = () => handleAddNode(nodes, setNodes, "comment");
 
   return (
     <div className="container">
       <Drawer
-        onAddDefaultNode={addDefaultNodeHandler}
+        onAddDefaultNode={addRectangelNodeHandler}
         onAddCircleNode={addCircleNodeHandler}
         onAddDiamondNode={addDiamondNodeHandler}
         onEdgeTypeChange={handleEdgeTypeChange}
+        onAddCommentNode={addCommentNodeHandler}
       />
       <div className="flowConatiner">
         <ReactFlow
@@ -43,11 +48,16 @@ const Flow: React.FC = () => {
           onConnect={onConnect}
           onEdgesDelete={onEdgesDelete}
           onSelectionChange={onSelectionChange}
-          nodeTypes={{ diamond: DiamondNode, oval: CircularNode }}
-          defaultEdgeOptions={{animated:true}}
+          nodeTypes={{
+            diamond: DiamondNode,
+            oval: CircularNode,
+            comment: CommentNode,
+            rectangel: ReactangularNode,
+          }}
+          defaultEdgeOptions={{ animated: true }}
         >
           <Controls />
-          <Background color="orange" gap={6} />
+          <Background color="orange" gap={3} />
         </ReactFlow>
       </div>
     </div>
