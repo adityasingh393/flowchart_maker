@@ -21,7 +21,7 @@ const DiamondNode = ({ id, data, selected }: any) => {
         type="source"
         position={Position.Top}
         style={{
-          // top: "%",
+          // top: "-1%",
           // left: "0%",
           backgroundColor: "darkgreen",
         }}
@@ -32,7 +32,7 @@ const DiamondNode = ({ id, data, selected }: any) => {
         onChange={handleLabelChange}
         style={{
           border: "none",
-          height: "100%",
+          height: "10%",
           transform: "rotate(-45deg)",
           outline: "none",
           width: "90%",
@@ -54,3 +54,4 @@ const DiamondNode = ({ id, data, selected }: any) => {
 };
 
 export default DiamondNode;
+// im making a flow chart maker web app using react flow and typescript i want to implement a feature of allowing users to select all the nodes and edges presnet on the canvas or flow implement it

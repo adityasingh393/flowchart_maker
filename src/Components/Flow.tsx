@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Background, Controls, useNodesState, ReactFlow } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import Drawer from "./Drawer";
@@ -29,6 +29,28 @@ const Flow: React.FC = () => {
   const addCircleNodeHandler = () => handleAddNode(nodes, setNodes, "oval");
   const addDiamondNodeHandler = () => handleAddNode(nodes, setNodes, "diamond");
   const addCommentNodeHandler = () => handleAddNode(nodes, setNodes, "comment");
+
+  const selectAllNodes = () => {
+    const updatedNodes = nodes.map((node) => ({
+      ...node,
+      selected: true,
+    }));
+    setNodes(updatedNodes);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === "a") {
+        selectAllNodes();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [nodes]);
 
   return (
     <div className="container">
