@@ -1,7 +1,7 @@
-import { Handle, Position } from "@xyflow/react";
+import { Handle, NodeResizer, Position } from "@xyflow/react";
 import { useState } from "react";
 
-const DiamondNode = ({ id, data }: any) => {
+const DiamondNode = ({ id, data, selected }: any) => {
   const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,57 +10,46 @@ const DiamondNode = ({ id, data }: any) => {
   };
 
   return (
-    <div
-      style={{
-        width: 100,
-        height: 100,
-        transform: "rotate(45deg)",
-        border: "1px solid",
-        display: "flex",
-        alignItems: "center",
-        backgroundColor: "white",
-        justifyContent: "center",
-      }}
-    >
-      <div
-        style={{
-          transform: "rotate(-45deg)",
-          textAlign: "center",
-        }}
-      >
-        <input
-          type="text"
-          value={label}
-          onChange={handleLabelChange}
-          style={{
-            border:"none",
-            height: "100%",
-            outline:"none",
-            width: "90%",
-            background: "transparent",
-            textAlign: "center",
-          }}
-        />
-      </div>
+    <>
+      <NodeResizer
+        minHeight={100}
+        minWidth={100}
+        isVisible={selected}
+        keepAspectRatio={true}
+      />
       <Handle
         type="source"
         position={Position.Top}
         style={{
-          top: -1,
-          left: -2,
+          // top: "%",
+          // left: "0%",
           backgroundColor: "darkgreen",
+        }}
+      />
+      <input
+        type="text"
+        value={label}
+        onChange={handleLabelChange}
+        style={{
+          border: "none",
+          height: "100%",
+          transform: "rotate(-45deg)",
+          outline: "none",
+          width: "90%",
+          background: "transparent",
+          textAlign: "center",
         }}
       />
       <Handle
         type="target"
-        position={Position.Left}
+        position={Position.Bottom}
         style={{
-          top: 100,
-          left: 100,
+          // top: "-1%",
+          // left: "1%",
           backgroundColor: "red",
         }}
       />
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
-import { Handle, Position } from "@xyflow/react";
+import { Handle, NodeResizer, Position } from "@xyflow/react";
 import { useState } from "react";
 
-const ReactangularNode = ({ id, data }: any) => {
+const ReactangularNode = ({ id, data, selected }: any) => {
   const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,18 +10,18 @@ const ReactangularNode = ({ id, data }: any) => {
   };
 
   return (
-    <div
-      style={{
-        width: 150,
-        height: 80,
-        border: "1px solid black",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "white",
-        position: "relative",
-      }}
-    >
+    <>
+      <NodeResizer minHeight={40} minWidth={80} isVisible={selected} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        style={{
+          bottom: "100%",
+          // left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "green",
+        }}
+      />
       <input
         type="text"
         value={label}
@@ -31,30 +31,21 @@ const ReactangularNode = ({ id, data }: any) => {
           textAlign: "center",
           width: "90%",
           backgroundColor: "transparent",
-          outline: "none",     
-        }}
-      />
-      <Handle
-        type="source"
-        position={Position.Top}
-        style={{
-          top: -5,
-          left: "50%",
-          transform: "translateX(-50%)",
-          backgroundColor: "green",
+          outline: "none",
         }}
       />
       <Handle
         type="target"
-        position={Position.Bottom}
+        position={Position.Top}
         style={{
-          bottom: -5,
+          top: "100%",
           left: "50%",
           transform: "translateX(-50%)",
           backgroundColor: "red",
         }}
       />
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 

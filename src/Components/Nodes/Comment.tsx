@@ -1,24 +1,15 @@
+import { NodeResizer } from "@xyflow/react";
 import { useState } from "react";
 
-const CommentNode = ({ id, data }: any) => {
+const CommentNode = ({ id, data, selected }: any) => {
   const [label, setLabel] = useState(data.label);
   const handleLabelChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLabel(e.target.value);
     data.onChange(id, e.target.value);
   };
   return (
-    <div
-      style={{
-        width: 100,
-        height: 100,
-        borderRadius: "5px",
-        border: "1px solid",
-        display: "flex",
-        alignItems: "center",
-        backgroundColor: "white",
-        justifyContent: "center",
-      }}
-    >
+    <>
+    <NodeResizer minHeight={100} minWidth={100} isVisible={selected}/>
       <textarea
         value={label}
         onChange={handleLabelChange}
@@ -30,11 +21,11 @@ const CommentNode = ({ id, data }: any) => {
           resize: "none",
           border: "none",
           outline: "none",
-
           overflow: "hidden",
         }}
       />
-    </div>
+    </>
+
   );
 };
 
