@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Position, NodeResizer, Handle } from "@xyflow/react";
 import { CustomNodeProp } from "../../types/types";
@@ -36,7 +35,10 @@ const CustomRhombusNode = ({ id, data, selected }: CustomNodeProp) => {
           backgroundColor: "transparent",
           textAlign: "center",
           outline: "none",
-          width: "100%",
+          width: "95%",
+          height: "95%",
+          color: "green",
+          fontSize: "160%",
           transform: "rotate(-45deg)",
         }}
       />
