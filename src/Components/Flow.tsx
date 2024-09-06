@@ -44,7 +44,6 @@ const Flow: React.FC = () => {
         selectAllNodes();
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -79,7 +78,7 @@ const Flow: React.FC = () => {
           defaultEdgeOptions={{ animated: true }}
         >
           <Controls />
-          <Background color="orange" gap={3} />
+          <Background color="#f0f0f0" gap={5} />
         </ReactFlow>
       </div>
     </div>

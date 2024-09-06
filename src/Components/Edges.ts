@@ -4,6 +4,7 @@ import {
   Edge,
   Connection,
   OnSelectionChangeFunc,
+  MarkerType,
 } from "@xyflow/react";
 import { useCallback, useState } from "react";
 
@@ -14,7 +15,20 @@ const useEdges = () => {
 
   const onConnect = useCallback(
     (edge: Edge | Connection) => {
-      const newEdge = { ...edge, type: selectedEdgeType };
+      const newEdge = {
+        ...edge,
+        type: selectedEdgeType, 
+        // markerEnd: {
+        //   type: MarkerType.ArrowClosed,
+        //   width: 13,
+        //   height: 13,
+        //   color: '#008CBA',
+        // },
+        style: {
+          strokeWidth: 3,
+          stroke: '#008CBA',
+        },
+      };
       setEdges((eds) => addEdge(newEdge, eds));
     },
     [edges, selectedEdgeType]

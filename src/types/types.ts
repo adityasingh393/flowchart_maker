@@ -14,4 +14,12 @@ export type CustomDrawerProps = {
   onAddCommentNode:()=>void;
   onEdgeTypeChange: (type: "default" | "straight" | "step" | "smoothstep") => void;
 };
-// user can resize the components but when resizing their shape should be entact 
+
+export interface CustomNodeProp {
+  id: string;
+  data: {
+    label: string;
+    onChange: (id: string, newValue: string) => void;
+  };
+  selected?: boolean|undefined;
+}

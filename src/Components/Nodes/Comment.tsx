@@ -1,7 +1,7 @@
 import { NodeResizer } from "@xyflow/react";
 import { useState } from "react";
-
-const CommentNode = ({ id, data, selected }: any) => {
+import { CustomNodeProp } from "../../types/types";
+const CommentNode = ({ id, data, selected }: CustomNodeProp) => {
   const [label, setLabel] = useState(data.label);
   const handleLabelChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLabel(e.target.value);

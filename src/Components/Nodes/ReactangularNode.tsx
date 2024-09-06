@@ -1,7 +1,7 @@
 import { Handle, NodeResizer, Position } from "@xyflow/react";
 import { useState } from "react";
-
-const ReactangularNode = ({ id, data, selected }: any) => {
+import { CustomNodeProp } from "../../types/types";
+const ReactangularNode = ({ id, data, selected }: CustomNodeProp) => {
   const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {

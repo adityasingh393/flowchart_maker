@@ -1,7 +1,8 @@
 import { Handle, NodeResizer, Position } from "@xyflow/react";
 import { useState } from "react";
+import { CustomNodeProp } from "../../types/types";
 
-const DiamondNode = ({ id, data, selected }: any) => {
+const DiamondNode = ({ id, data, selected }:CustomNodeProp) => {
   const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,4 +55,3 @@ const DiamondNode = ({ id, data, selected }: any) => {
 };
 
 export default DiamondNode;
-// im making a flow chart maker web app using react flow and typescript i want to implement a feature of allowing users to select all the nodes and edges presnet on the canvas or flow implement it
