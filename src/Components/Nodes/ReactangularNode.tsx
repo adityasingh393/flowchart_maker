@@ -11,14 +11,16 @@ const ReactangularNode = ({ id, data, selected }: CustomNodeProp) => {
 
   return (
     <>
-      <NodeResizer minHeight={40} minWidth={80} isVisible={selected} />
+      <NodeResizer
+        minHeight={40}
+        minWidth={80}
+        isVisible={selected}
+        keepAspectRatio={true}
+      />
       <Handle
         type="source"
-        position={Position.Bottom}
+        position={Position.Top}
         style={{
-          bottom: "100%",
-          // left: "50%",
-          transform: "translateX(-50%)",
           backgroundColor: "green",
         }}
       />
@@ -29,18 +31,17 @@ const ReactangularNode = ({ id, data, selected }: CustomNodeProp) => {
         style={{
           border: "none",
           textAlign: "center",
-          width: "90%",
+          width: "80%",
+          color: "green",
+          fontSize: "120%",
           backgroundColor: "transparent",
           outline: "none",
         }}
       />
       <Handle
         type="target"
-        position={Position.Top}
+        position={Position.Bottom}
         style={{
-          top: "100%",
-          left: "50%",
-          transform: "translateX(-50%)",
           backgroundColor: "red",
         }}
       />

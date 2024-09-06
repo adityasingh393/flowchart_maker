@@ -18,15 +18,16 @@ const useEdges = () => {
       const newEdge = {
         ...edge,
         type: selectedEdgeType, 
-        // markerEnd: {
-        //   type: MarkerType.ArrowClosed,
-        //   width: 13,
-        //   height: 13,
-        //   color: '#008CBA',
-        // },
+        markerEnd: {
+          type: MarkerType.ArrowClosed,
+          width: 13,
+          height: 13,
+          color: '#008CBA',
+        },
         style: {
           strokeWidth: 3,
           stroke: '#008CBA',
+          position :"absolute"
         },
       };
       setEdges((eds) => addEdge(newEdge, eds));

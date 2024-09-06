@@ -49,14 +49,8 @@ export const createNewNode = (
       position: { x: 400, y: Math.random() * 600 },
       data: { label: `Diamond Node ` },
       style: {
-        border: "1px solid black",
         height: 100,
         width: 100,
-        // transform:"rotate(45deg)",
-        display: "flex",
-        alignItems: "center",
-        backgroundColor: "white",
-        justifyContent: "center",
       },
     };
   } else if (shape === "comment") {
@@ -67,8 +61,8 @@ export const createNewNode = (
       data: { label: `comment Node` },
       style: {
         borderRadius: "5px",
-        height: 100,
-        width: 100,
+        height: 80,
+        width: 150,
         border: "1px solid",
         display: "flex",
         alignItems: "center",

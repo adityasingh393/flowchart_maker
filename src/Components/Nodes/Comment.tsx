@@ -9,23 +9,22 @@ const CommentNode = ({ id, data, selected }: CustomNodeProp) => {
   };
   return (
     <>
-    <NodeResizer minHeight={100} minWidth={100} isVisible={selected}/>
+      <NodeResizer minHeight={80} minWidth={150} isVisible={selected} />
       <textarea
         value={label}
         onChange={handleLabelChange}
         style={{
-          width: "100%",
-          height: "100%",
-          background: "transparent",
-          textAlign: "center",
-          resize: "none",
           border: "none",
+          textAlign: "center",
+          width: "95%",
+          height: "95%",
+          color: "green",
+          fontSize: "160%",
+          backgroundColor: "transparent",
           outline: "none",
-          overflow: "hidden",
         }}
       />
     </>
-
   );
 };
 
