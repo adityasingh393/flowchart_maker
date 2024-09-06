@@ -6,14 +6,15 @@ import { TbOvalVertical } from "react-icons/tb";
 import { BsSuitDiamond } from "react-icons/bs";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { TbArrowCurveRight } from "react-icons/tb";
 import { PiStepsLight } from "react-icons/pi";
-
+import { PiSteps } from "react-icons/pi";
 const Drawer: React.FC<CustomDrawerProps> = ({
   onAddDefaultNode,
   onAddCircleNode,
   onAddDiamondNode,
   onEdgeTypeChange,
-  onAddCommentNode
+  onAddCommentNode,
 }) => {
   const [isNodesOpen, setNodesOpen] = useState(false);
   const [isEdgesOpen, setEdgesOpen] = useState(false);
@@ -21,7 +22,10 @@ const Drawer: React.FC<CustomDrawerProps> = ({
   return (
     <div className="drawer">
       <div className="dropdown">
-        <button className="dropdown-button" onClick={() => setNodesOpen(!isNodesOpen)}>
+        <button
+          className="dropdown-button"
+          onClick={() => setNodesOpen(!isNodesOpen)}
+        >
           Nodes
         </button>
         {isNodesOpen && (
@@ -43,19 +47,27 @@ const Drawer: React.FC<CustomDrawerProps> = ({
       </div>
 
       <div className="dropdown">
-        <button className="dropdown-button" onClick={() => setEdgesOpen(!isEdgesOpen)}>
+        <button
+          className="dropdown-button"
+          onClick={() => setEdgesOpen(!isEdgesOpen)}
+        >
           Edges
         </button>
         {isEdgesOpen && (
           <div className="dropdown-menu">
-            <button onClick={() => onEdgeTypeChange("default")}>Default Edge</button>
+            <button onClick={() => onEdgeTypeChange("default")}>
+              <TbArrowCurveRight />
+              Default Edge
+            </button>
             <button onClick={() => onEdgeTypeChange("straight")}>
               <FaArrowRightLong /> Straight Edge
             </button>
             <button onClick={() => onEdgeTypeChange("step")}>
               <PiStepsLight /> Step Edge
             </button>
-            <button onClick={() => onEdgeTypeChange("smoothstep")}>Smooth Step Edge</button>
+            <button onClick={() => onEdgeTypeChange("smoothstep")}>
+             <PiSteps/> edge Step Edge
+            </button>
           </div>
         )}
       </div>
