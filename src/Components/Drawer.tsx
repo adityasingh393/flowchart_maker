@@ -66,7 +66,7 @@ const Drawer: React.FC<CustomDrawerProps> = ({
               <PiStepsLight /> Step Edge
             </button>
             <button onClick={() => onEdgeTypeChange("smoothstep")}>
-             <PiSteps/> edge Step Edge
+              <PiSteps /> Smooth Step Edge
             </button>
           </div>
         )}
