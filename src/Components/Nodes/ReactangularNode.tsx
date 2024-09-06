@@ -45,7 +45,6 @@ const ReactangularNode = ({ id, data, selected }: CustomNodeProp) => {
           backgroundColor: "red",
         }}
       />
-      {/* </div> */}
     </>
   );
 };

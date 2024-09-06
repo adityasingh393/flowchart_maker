@@ -8,17 +8,19 @@ const CircularNode = ({ id, data, selected }: CustomNodeProp) => {
     setLabel(e.target.value);
     data.onChange(id, e.target.value);
   };
-
   return (
     <>
-      <NodeResizer minHeight={100} minWidth={200} isVisible={selected} keepAspectRatio={true} />
+      <NodeResizer
+        minHeight={100}
+        minWidth={200}
+        isVisible={selected}
+        keepAspectRatio={true}
+      />
       <Handle
         type="source"
         position={Position.Right}
         style={{
           top: "50%",
-          right: "-3%",
-          transform: "translateX(-50%)",
           backgroundColor: "green",
         }}
       />
@@ -30,8 +32,8 @@ const CircularNode = ({ id, data, selected }: CustomNodeProp) => {
           border: "none",
           textAlign: "center",
           width: "90%",
-          color:"green",
-          fontSize:"160%",
+          color: "green",
+          fontSize: "160%",
           backgroundColor: "transparent",
           outline: "none",
         }}
@@ -41,8 +43,6 @@ const CircularNode = ({ id, data, selected }: CustomNodeProp) => {
         position={Position.Left}
         style={{
           top: "50%",
-          left: "-1.5%",
-          transform: "translateY(-50%)",
           backgroundColor: "red",
         }}
       />
