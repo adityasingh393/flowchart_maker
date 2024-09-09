@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Position, NodeResizer, Handle } from "@xyflow/react";
 import { CustomNodeProp } from "../../types/types";
 
-const CustomRhombusNode = ({ id, data, selected }: CustomNodeProp) => {
-  const [inputValue, setInputValue] = useState(data.label);
+const CustomRhombusNode = ({  data, selected }: CustomNodeProp) => {
+  const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    data.onChange(id, e.target.value);
+  const newLabel=e.target.value;
+  setLabel(newLabel);
+  data.label=newLabel;
   };
 
   return (
@@ -28,7 +29,7 @@ const CustomRhombusNode = ({ id, data, selected }: CustomNodeProp) => {
     >
       <input
         type="text"
-        value={inputValue}
+        value={label}
         onChange={handleLabelChange}
         style={{
           border: "none",
@@ -54,7 +55,6 @@ const CustomRhombusNode = ({ id, data, selected }: CustomNodeProp) => {
         type="source"
         position={Position.Top}
         style={{
-          // top: "1%",
           left: "0%",
           backgroundColor: "green",
         }}
@@ -64,7 +64,6 @@ const CustomRhombusNode = ({ id, data, selected }: CustomNodeProp) => {
         type="target"
         position={Position.Bottom}
         style={{
-          // bottom: "1%",
           left: "100%",
           backgroundColor: "red",
         }}

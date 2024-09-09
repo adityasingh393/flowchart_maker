@@ -11,23 +11,25 @@ import { useCallback, useState } from "react";
 const useEdges = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [selectedEdges, setSelectedEdges] = useState<string[]>([]);
-  const [selectedEdgeType, setSelectedEdgeType] = useState<"default" | "straight" | "step" | "smoothstep">("default");
+  const [selectedEdgeType, setSelectedEdgeType] = useState<
+    "default" | "straight" | "step" | "smoothstep"
+  >("default");
 
   const onConnect = useCallback(
     (edge: Edge | Connection) => {
       const newEdge = {
         ...edge,
-        type: selectedEdgeType, 
+        type: selectedEdgeType,
         markerEnd: {
           type: MarkerType.ArrowClosed,
           width: 13,
           height: 13,
-          color: '#008CBA',
+          color: "#008CBA",
         },
         style: {
           strokeWidth: 3,
-          stroke: '#008CBA',
-          position :"absolute"
+          stroke: "#008CBA",
+          position: "absolute",
         },
       };
       setEdges((eds) => addEdge(newEdge, eds));
@@ -61,6 +63,7 @@ const useEdges = () => {
 
   return {
     edges,
+    setEdges,
     onEdgesChange,
     onConnect,
     onEdgesDelete,

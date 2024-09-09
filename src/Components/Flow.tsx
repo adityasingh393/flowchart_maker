@@ -10,6 +10,7 @@ import "../Styles/flow.css";
 import CircularNode from "./Nodes/CircularNode";
 import CommentNode from "./Nodes/Comment";
 import ReactangularNode from "./Nodes/ReactangularNode";
+import { loadFlowFromLocalForage } from "../utils/storage";
 
 const initialNodes: CustomNode[] = [];
 
@@ -17,6 +18,7 @@ const Flow: React.FC = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const {
     edges,
+    setEdges,
     onEdgesChange,
     onConnect,
     onEdgesDelete,
@@ -37,6 +39,15 @@ const Flow: React.FC = () => {
     }));
     setNodes(updatedNodes);
   };
+  useEffect(() => {
+    const loadFlow = async () => {
+      const { nodes, edges } = await loadFlowFromLocalForage();
+      setNodes(nodes);
+setEdges(edges);
+    };
+
+    loadFlow();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -59,6 +70,8 @@ const Flow: React.FC = () => {
         onAddDiamondNode={addDiamondNodeHandler}
         onEdgeTypeChange={handleEdgeTypeChange}
         onAddCommentNode={addCommentNodeHandler}
+        nodes={nodes}
+        edges={edges}
       />
       <div className="flowConatiner">
         <ReactFlow

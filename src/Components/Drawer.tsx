@@ -9,23 +9,37 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { TbArrowCurveRight } from "react-icons/tb";
 import { PiStepsLight } from "react-icons/pi";
 import { PiSteps } from "react-icons/pi";
+import { saveFlowToLocalForage } from "../utils/storage";
 const Drawer: React.FC<CustomDrawerProps> = ({
   onAddDefaultNode,
   onAddCircleNode,
   onAddDiamondNode,
   onEdgeTypeChange,
   onAddCommentNode,
+  nodes,
+  edges,
 }) => {
   const [isNodesOpen, setNodesOpen] = useState(false);
   const [isEdgesOpen, setEdgesOpen] = useState(false);
-
+  const handleSave = () => {
+    saveFlowToLocalForage(nodes, edges);
+  };
+  const handleEdgesClick = () => {
+    setEdgesOpen(!isEdgesOpen);
+    if (isNodesOpen) {
+      setNodesOpen(!isNodesOpen);
+    }
+  };
+  const handleNodesClick = () => {
+    setNodesOpen(!isNodesOpen);
+    if (isEdgesOpen) {
+      setEdgesOpen(!isEdgesOpen);
+    }
+  };
   return (
     <div className="drawer">
       <div className="dropdown">
-        <button
-          className="dropdown-button"
-          onClick={() => setNodesOpen(!isNodesOpen)}
-        >
+        <button className="dropdown-button" onClick={handleNodesClick}>
           Nodes
         </button>
         {isNodesOpen && (
@@ -47,10 +61,7 @@ const Drawer: React.FC<CustomDrawerProps> = ({
       </div>
 
       <div className="dropdown">
-        <button
-          className="dropdown-button"
-          onClick={() => setEdgesOpen(!isEdgesOpen)}
-        >
+        <button className="dropdown-button" onClick={handleEdgesClick}>
           Edges
         </button>
         {isEdgesOpen && (
@@ -70,6 +81,9 @@ const Drawer: React.FC<CustomDrawerProps> = ({
             </button>
           </div>
         )}
+      </div>
+      <div>
+        <button onClick={handleSave}>Save Flow</button>
       </div>
     </div>
   );

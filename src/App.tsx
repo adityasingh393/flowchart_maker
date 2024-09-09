@@ -1,6 +1,6 @@
-import React from 'react';
-import Flow from './Components/Flow';
-import './App.css'; 
+import React from "react";
+import Flow from "./Components/Flow";
+import "./App.css";
 
 const App: React.FC = () => {
   return (
