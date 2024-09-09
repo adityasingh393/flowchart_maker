@@ -82,8 +82,8 @@ const Drawer: React.FC<CustomDrawerProps> = ({
           </div>
         )}
       </div>
-      <div>
-        <button onClick={handleSave}>Save Flow</button>
+      <div className="dropdown">
+        <button className="dropdown-button" onClick={handleSave}>Save Flow</button>
       </div>
     </div>
   );
