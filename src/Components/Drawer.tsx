@@ -22,7 +22,9 @@ const Drawer: React.FC<CustomDrawerProps> = ({
   const [isNodesOpen, setNodesOpen] = useState(false);
   const [isEdgesOpen, setEdgesOpen] = useState(false);
   const handleSave = () => {
-    saveFlowToLocalForage(nodes, edges);
+    saveFlowToLocalForage(nodes, edges)
+    .then(()=>alert("Progress saved"))
+    .catch((err)=>alert(err));
   };
   const handleEdgesClick = () => {
     setEdgesOpen(!isEdgesOpen);
