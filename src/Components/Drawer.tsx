@@ -1,10 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
-import {
-  saveFlowToLocalForage,
-  loadCanvasListFromLocalForage,
-  removeCanvasFromLocalForage,
-} from "../utils/storage";
+import React, { useState } from "react";
 import { DrawerProps } from "../types/types";
 import "../Styles/drawer.css";
 import { LuRectangleHorizontal } from "react-icons/lu";
@@ -15,6 +9,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { TbArrowCurveRight } from "react-icons/tb";
 import { PiStepsLight } from "react-icons/pi";
 import { PiSteps } from "react-icons/pi";
+import CanvasList from "./Canvas";
 
 const Drawer: React.FC<DrawerProps> = ({
   onAddDefaultNode,
@@ -28,23 +23,14 @@ const Drawer: React.FC<DrawerProps> = ({
 }) => {
   const [isNodesOpen, setNodesOpen] = useState(false);
   const [isEdgesOpen, setEdgesOpen] = useState(false);
-  const [canvasList, setCanvasList] = useState<{ canvasId: string }[]>([]);
-  const [selectedCanvasId, setSelectedCanvasId] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadCanvasList = async () => {
-      const canvases = await loadCanvasListFromLocalForage();
-      setCanvasList(canvases.map((c) => ({ canvasId: c.canvasId })));
-    };
-
-    loadCanvasList();
-  }, []);
   const handleEdgesClick = () => {
     setEdgesOpen(!isEdgesOpen);
     if (isNodesOpen) {
       setNodesOpen(!isNodesOpen);
     }
   };
+
   const handleNodesClick = () => {
     setNodesOpen(!isNodesOpen);
     if (isEdgesOpen) {
@@ -52,50 +38,13 @@ const Drawer: React.FC<DrawerProps> = ({
     }
   };
 
-  const handleSave = () => {
-    if (selectedCanvasId) {
-      saveFlowToLocalForage(selectedCanvasId, nodes, edges);
-    }
-  };
-
-  const handleAddCanvas = () => {
-    const newCanvasId = uuidv4();
-    setCanvasList([...canvasList, { canvasId: newCanvasId }]);
-    setSelectedCanvasId(newCanvasId);
-    onCanvasSelect(newCanvasId);
-  };
-
-  const handleDeleteCanvas = async (canvasId: string) => {
-    await removeCanvasFromLocalForage(canvasId);
-    setCanvasList(canvasList.filter((c) => c.canvasId !== canvasId));
-    if (selectedCanvasId === canvasId) {
-      setSelectedCanvasId(null);
-    }
-  };
-
-  const handleSelectCanvas = (canvasId: string) => {
-    setSelectedCanvasId(canvasId);
-    onCanvasSelect(canvasId);
-  };
-
   return (
     <div className="drawer">
-      <div className="canvas-manager">
-        <button onClick={handleAddCanvas}>Add Canvas</button>
-        <ul>
-          {canvasList.map(({ canvasId }) => (
-            <li key={canvasId}>
-              <button onClick={() => handleSelectCanvas(canvasId)}>
-                Select {canvasId}
-              </button>
-              <button onClick={() => handleDeleteCanvas(canvasId)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button onClick={handleSave}>Save Current Canvas</button>
-      </div>
+      <CanvasList
+        onSelectCanvas={onCanvasSelect}
+        currentNodes={nodes}
+        currentEdges={edges}
+      />
       <div className="dropdown">
         <button className="dropdown-button" onClick={handleNodesClick}>
           Nodes

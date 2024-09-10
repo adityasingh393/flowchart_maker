@@ -38,6 +38,7 @@ export interface CanvasListProps {
   currentEdges: Edge[];
 }
 export interface CanvasData {
+  name: string;
   canvasId: string;
   nodes: CustomNode[];
   edges: Edge[];
