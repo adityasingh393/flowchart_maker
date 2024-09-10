@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Background, Controls, useNodesState, ReactFlow } from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
 import Drawer from "./Drawer";
 import { handleAddNode } from "./Nodes/Nodes";
 import useEdges from "./Edges";
-import DiamondNode from "./Nodes/DaimondNode";
-import { CustomNode } from "../types/types";
+import { loadFlowFromLocalForage } from "../utils/storage";
 import "../Styles/flow.css";
+import "@xyflow/react/dist/style.css";
+import DiamondNode from "./Nodes/DaimondNode";
 import CircularNode from "./Nodes/CircularNode";
 import CommentNode from "./Nodes/Comment";
 import ReactangularNode from "./Nodes/ReactangularNode";
-import { loadFlowFromLocalForage } from "../utils/storage";
+import { CustomNode } from "../types/types";
 
 const initialNodes: CustomNode[] = [];
 
@@ -25,6 +25,7 @@ const Flow: React.FC = () => {
     onSelectionChange,
     handleEdgeTypeChange,
   } = useEdges();
+  const [_, setCurrentCanvasId] = useState<string | null>(null);
 
   const addRectangelNodeHandler = () =>
     handleAddNode(nodes, setNodes, "rectangel");
@@ -40,16 +41,6 @@ const Flow: React.FC = () => {
     setNodes(updatedNodes);
   };
   useEffect(() => {
-    const loadFlow = async () => {
-      const { nodes, edges } = await loadFlowFromLocalForage();
-      setNodes(nodes);
-setEdges(edges);
-    };
-
-    loadFlow();
-  }, []);
-
-  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === "a") {
         selectAllNodes();
@@ -62,6 +53,13 @@ setEdges(edges);
     };
   }, [nodes]);
 
+  const loadCanvas = async (canvasId: string) => {
+    const { nodes, edges } = await loadFlowFromLocalForage(canvasId);
+    setNodes(nodes);
+    setEdges(edges);
+    setCurrentCanvasId(canvasId);
+  };
+
   return (
     <div className="container">
       <Drawer
@@ -72,6 +70,7 @@ setEdges(edges);
         onAddCommentNode={addCommentNodeHandler}
         nodes={nodes}
         edges={edges}
+        onCanvasSelect={loadCanvas}
       />
       <div className="flowConatiner">
         <ReactFlow
@@ -82,13 +81,13 @@ setEdges(edges);
           onConnect={onConnect}
           onEdgesDelete={onEdgesDelete}
           onSelectionChange={onSelectionChange}
+          defaultEdgeOptions={{ animated: true }}
           nodeTypes={{
             diamond: DiamondNode,
             oval: CircularNode,
             comment: CommentNode,
             rectangel: ReactangularNode,
           }}
-          defaultEdgeOptions={{ animated: true }}
         >
           <Controls />
           <Background color="#f0f0f0" gap={5} />

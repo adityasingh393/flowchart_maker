@@ -1,7 +1,7 @@
 .container{
     height: 100vh;
     display: flex;
-    width: 100vw;
+    width: 70vw;
 }
 .flowConatiner{
     flex: 1;

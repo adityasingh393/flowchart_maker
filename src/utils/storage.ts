@@ -1,29 +1,78 @@
 import localforage from "localforage";
-import { CustomNode } from "../types/types";
+import { CanvasData, CustomNode } from "../types/types";
 import { Edge } from "@xyflow/react";
 
 export const saveFlowToLocalForage = async (
+  canvasId: string,
   nodes: CustomNode[],
   edges: Edge[]
 ): Promise<void> => {
   try {
-    await localforage.setItem("flowchartNodes", nodes);
-    await localforage.setItem("flowchartEdges", edges);
-    console.log("Flow saved successfully to localforage.");
+    const newCanvasData = { canvasId, nodes, edges };
+    const storedCanvases =
+      (await localforage.getItem<CanvasData[]>("canvases")) || [];
+
+    let canvasExists = false;
+    for (let i = 0; i < storedCanvases.length; i++) {
+      if (storedCanvases[i].canvasId === canvasId) {
+        storedCanvases[i] = newCanvasData;
+        canvasExists = true;
+        break;
+      }
+    }
+    if (!canvasExists) {
+      storedCanvases.push(newCanvasData);
+    }
+
+    await localforage.setItem("canvases", storedCanvases);
+
+    console.log(`Flow for canvas ${canvasId} saved successfully.`);
   } catch (error) {
-    console.error("Error saving flow to localforage:", error);
+    console.error(`Error saving flow for canvas ${canvasId}:`, error);
   }
 };
-export const loadFlowFromLocalForage = async (): Promise<{
-  nodes: CustomNode[];
-  edges: Edge[];
-}> => {
+export const loadFlowFromLocalForage = async (
+  canvasId: string
+): Promise<{ nodes: CustomNode[]; edges: Edge[] }> => {
   try {
-    const nodes = (await localforage.getItem("flowchartNodes")) as CustomNode[] || [];
-    const edges = (await localforage.getItem("flowchartEdges")) as Edge[] || [];
-    return { nodes, edges };
+    const storedCanvases =
+      (await localforage.getItem<CanvasData[]>("canvases")) || [];
+    const canvas = storedCanvases.find((c) => c.canvasId === canvasId);
+
+    return canvas
+      ? { nodes: canvas.nodes, edges: canvas.edges }
+      : { nodes: [], edges: [] };
   } catch (error) {
-    console.error("Error loading flow from localforage:", error);
+    console.error(`Error loading flow for canvas ${canvasId}:`, error);
     return { nodes: [], edges: [] };
+  }
+};
+export const loadCanvasListFromLocalForage = async (): Promise<
+  CanvasData[]
+> => {
+  try {
+    const storedCanvases =
+      (await localforage.getItem<CanvasData[]>("canvases")) || [];
+    return storedCanvases;
+  } catch (error) {
+    console.error("Error loading canvas list from localforage:", error);
+    return [];
+  }
+};
+
+export const removeCanvasFromLocalForage = async (
+  canvasId: string
+): Promise<void> => {
+  try {
+    const storedCanvases =
+      (await localforage.getItem<CanvasData[]>("canvases")) || [];
+    const updatedCanvases = storedCanvases.filter(
+      (canvas) => canvas.canvasId !== canvasId
+    );
+
+    await localforage.setItem("canvases", updatedCanvases);
+    console.log(`Canvas ${canvasId} removed successfully.`);
+  } catch (error) {
+    console.error(`Error removing canvas ${canvasId}:`, error);
   }
 };
