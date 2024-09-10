@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CustomDrawerProps } from "../types/types";
+import { DrawerProps } from "../types/types";
 import "../Styles/drawer.css";
 import { LuRectangleHorizontal } from "react-icons/lu";
 import { TbOvalVertical } from "react-icons/tb";
@@ -9,8 +9,9 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { TbArrowCurveRight } from "react-icons/tb";
 import { PiStepsLight } from "react-icons/pi";
 import { PiSteps } from "react-icons/pi";
-import { saveFlowToLocalForage } from "../utils/storage";
-const Drawer: React.FC<CustomDrawerProps> = ({
+import CanvasList from "./Canvas";
+
+const Drawer: React.FC<DrawerProps> = ({
   onAddDefaultNode,
   onAddCircleNode,
   onAddDiamondNode,
@@ -18,28 +19,32 @@ const Drawer: React.FC<CustomDrawerProps> = ({
   onAddCommentNode,
   nodes,
   edges,
+  onCanvasSelect,
 }) => {
   const [isNodesOpen, setNodesOpen] = useState(false);
   const [isEdgesOpen, setEdgesOpen] = useState(false);
-  const handleSave = () => {
-    saveFlowToLocalForage(nodes, edges)
-    .then(()=>alert("Progress saved"))
-    .catch((err)=>alert(err));
-  };
+
   const handleEdgesClick = () => {
     setEdgesOpen(!isEdgesOpen);
     if (isNodesOpen) {
       setNodesOpen(!isNodesOpen);
     }
   };
+
   const handleNodesClick = () => {
     setNodesOpen(!isNodesOpen);
     if (isEdgesOpen) {
       setEdgesOpen(!isEdgesOpen);
     }
   };
+
   return (
     <div className="drawer">
+      <CanvasList
+        onSelectCanvas={onCanvasSelect}
+        currentNodes={nodes}
+        currentEdges={edges}
+      />
       <div className="dropdown">
         <button className="dropdown-button" onClick={handleNodesClick}>
           Nodes
@@ -61,7 +66,6 @@ const Drawer: React.FC<CustomDrawerProps> = ({
           </div>
         )}
       </div>
-
       <div className="dropdown">
         <button className="dropdown-button" onClick={handleEdgesClick}>
           Edges
@@ -83,9 +87,6 @@ const Drawer: React.FC<CustomDrawerProps> = ({
             </button>
           </div>
         )}
-      </div>
-      <div className="dropdown">
-        <button className="dropdown-button" onClick={handleSave}>Save Flow</button>
       </div>
     </div>
   );

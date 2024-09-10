@@ -1,0 +1,83 @@
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    /* padding: 20px; */
+    width: 250px;
+    /* border-right: 1px solid #ccc; */
+  }
+  
+  .canvas-container input {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .canvas-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .canvas-container button:hover {
+    background-color: #218838;
+  }
+  
+  .list-items {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  .list-items li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .list-items li button {
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .list-items li button:first-child {
+    background-color: #007bff;
+    color: white;
+    margin-right: 5px;
+  }
+  
+  .list-items li button:last-child {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .list-items li button:first-child:hover {
+    background-color: #0056b3;
+  }
+  
+  .list-items li button:last-child:hover {
+    background-color: #c82333;
+  }
+  
+  .canvas-container button:focus,
+  .list-items li button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+  }
+  

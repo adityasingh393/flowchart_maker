@@ -22,11 +22,24 @@ export type CustomDrawerProps = {
     type: "default" | "straight" | "step" | "smoothstep"
   ) => void;
 };
-
+export interface DrawerProps extends CustomDrawerProps {
+  onCanvasSelect: (canvasId: string) => void;
+}
 export interface CustomNodeProp {
   id: string;
   data: {
     label: string;
   };
   selected?: boolean | undefined;
+}
+export interface CanvasListProps {
+  onSelectCanvas: (canvasId: string) => void;
+  currentNodes: CustomNode[];
+  currentEdges: Edge[];
+}
+export interface CanvasData {
+  name: string;
+  canvasId: string;
+  nodes: CustomNode[];
+  edges: Edge[];
 }
