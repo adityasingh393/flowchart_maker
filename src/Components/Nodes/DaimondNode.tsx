@@ -45,8 +45,8 @@ const CustomRhombusNode = ({  data, selected }: CustomNodeProp) => {
       />
 
       <NodeResizer
-        minHeight={100}
-        minWidth={100}
+        minHeight={40}
+        minWidth={40}
         isVisible={selected}
         keepAspectRatio={true}
       />

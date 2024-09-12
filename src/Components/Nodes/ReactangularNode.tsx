@@ -13,8 +13,8 @@ const ReactangularNode = ({ data, selected }: CustomNodeProp) => {
   return (
     <>
       <NodeResizer
-        minHeight={40}
-        minWidth={80}
+        minHeight={20}
+        minWidth={40}
         isVisible={selected}
         keepAspectRatio={true}
       />

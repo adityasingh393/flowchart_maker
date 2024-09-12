@@ -10,7 +10,7 @@ const CommentNode = ({ data, selected }: CustomNodeProp) => {
   };
   return (
     <>
-      <NodeResizer minHeight={80} minWidth={150} isVisible={selected} />
+      <NodeResizer minHeight={40} minWidth={75} isVisible={selected} />
       <textarea
         value={label}
         onChange={handleLabelChange}

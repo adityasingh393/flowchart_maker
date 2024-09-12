@@ -12,8 +12,8 @@ const CircularNode = ({ data, selected }: CustomNodeProp) => {
   return (
     <>
       <NodeResizer
-        minHeight={100}
-        minWidth={200}
+        minHeight={20}
+        minWidth={40}
         isVisible={selected}
         keepAspectRatio={true}
       />
