@@ -4,21 +4,32 @@
   background-color: #f8f9fa;
   padding: 20px;
   width: 250px;
+  /* position:absolute;
+  height: 40vh;
+  width:35vh;
+  margin-top: 20vh;
+  z-index: 1; */
   border-right: 1px solid #ccc;
 }
-
+.button{
+  display: flex;
+  padding-top: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  /* padding-right: 45px; */
+}
 .dropdown {
   margin-bottom: 20px;
 }
 
 .dropdown-button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   color: #ffffff;
   background-color: #007bff;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

@@ -45,48 +45,50 @@ const Drawer: React.FC<DrawerProps> = ({
         currentNodes={nodes}
         currentEdges={edges}
       />
-      <div className="dropdown">
-        <button className="dropdown-button" onClick={handleNodesClick}>
-          Nodes
-        </button>
-        {isNodesOpen && (
-          <div className="dropdown-menu">
-            <button onClick={onAddDefaultNode}>
-              <LuRectangleHorizontal /> Default Node
-            </button>
-            <button onClick={onAddCircleNode}>
-              <TbOvalVertical /> Circle Node
-            </button>
-            <button onClick={onAddDiamondNode}>
-              <BsSuitDiamond /> Diamond Node
-            </button>
-            <button onClick={onAddCommentNode}>
-              <FaRegCommentAlt /> Comment Node
-            </button>
-          </div>
-        )}
-      </div>
-      <div className="dropdown">
-        <button className="dropdown-button" onClick={handleEdgesClick}>
-          Edges
-        </button>
-        {isEdgesOpen && (
-          <div className="dropdown-menu">
-            <button onClick={() => onEdgeTypeChange("default")}>
-              <TbArrowCurveRight />
-              Default Edge
-            </button>
-            <button onClick={() => onEdgeTypeChange("straight")}>
-              <FaArrowRightLong /> Straight Edge
-            </button>
-            <button onClick={() => onEdgeTypeChange("step")}>
-              <PiStepsLight /> Step Edge
-            </button>
-            <button onClick={() => onEdgeTypeChange("smoothstep")}>
-              <PiSteps /> Smooth Step Edge
-            </button>
-          </div>
-        )}
+      <div className="button">
+        <div className="dropdown">
+          <button className="dropdown-button" onClick={handleNodesClick}>
+            Nodes
+          </button>
+          {isNodesOpen && (
+            <div className="dropdown-menu">
+              <button onClick={onAddDefaultNode}>
+                <LuRectangleHorizontal /> Default Node
+              </button>
+              <button onClick={onAddCircleNode}>
+                <TbOvalVertical /> Circle Node
+              </button>
+              <button onClick={onAddDiamondNode}>
+                <BsSuitDiamond /> Diamond Node
+              </button>
+              <button onClick={onAddCommentNode}>
+                <FaRegCommentAlt /> Comment Node
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="dropdown">
+          <button className="dropdown-button" onClick={handleEdgesClick}>
+            Edges
+          </button>
+          {isEdgesOpen && (
+            <div className="dropdown-menu">
+              <button onClick={() => onEdgeTypeChange("default")}>
+                <TbArrowCurveRight />
+                Default Edge
+              </button>
+              <button onClick={() => onEdgeTypeChange("straight")}>
+                <FaArrowRightLong /> Straight Edge
+              </button>
+              <button onClick={() => onEdgeTypeChange("step")}>
+                <PiStepsLight /> Step Edge
+              </button>
+              <button onClick={() => onEdgeTypeChange("smoothstep")}>
+                <PiSteps /> Smooth Step Edge
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

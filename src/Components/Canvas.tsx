@@ -7,7 +7,9 @@ import {
 } from "../utils/storage";
 import { CanvasListProps } from "../types/types";
 import "../Styles/canvas.css";
-import { TiDeleteOutline } from "react-icons/ti";
+import { MdDelete } from "react-icons/md";
+import { IoMdAdd } from "react-icons/io";
+
 const CanvasList: React.FC<CanvasListProps> = ({
   onSelectCanvas,
   currentNodes,
@@ -18,10 +20,13 @@ const CanvasList: React.FC<CanvasListProps> = ({
   );
   const [selectedCanvasId, setSelectedCanvasId] = useState<string | null>(null);
   const [newCanvasName, setNewCanvasName] = useState<string>("");
+  const [currentCanvasName, setCurrentCanvasName] =
+    useState<string>("None Selected");
 
   useEffect(() => {
     const loadCanvases = async () => {
       const storedCanvases = await loadCanvasListFromLocalForage();
+      console.log(storedCanvases);
       setCanvasList(
         storedCanvases.map((canvas) => ({
           id: canvas.canvasId,
@@ -66,31 +71,55 @@ const CanvasList: React.FC<CanvasListProps> = ({
 
   const handleSelectCanvas = (canvasId: string) => {
     setSelectedCanvasId(canvasId);
+    canvasList.map((canvas) => {
+      if (canvas.id === canvasId) {
+        setCurrentCanvasName(canvas.name);
+        return;
+      }
+    });
+
     onSelectCanvas(canvasId);
   };
 
   return (
     <div className="canvas-container">
-      <input
-        type="text"
-        placeholder="Enter canvas name"
-        value={newCanvasName}
-        onChange={(e) => setNewCanvasName(e.target.value)}
-      />
-      <button onClick={handleAddCanvas}>Add Canvas</button>
+      <div className="add-container">
+        <input
+          type="text"
+          placeholder="Enter canvas name"
+          value={newCanvasName}
+          onChange={(e) => setNewCanvasName(e.target.value)}
+        />
+        <button className="add-button" onClick={handleAddCanvas}>
+          <IoMdAdd />
+        </button>
+      </div>
       <ul className="list-items">
-        {canvasList.map((canvas) => (
-          <li key={canvas.id}>
-            <button onClick={() => handleSelectCanvas(canvas.id)}>
-              {canvas.name}
-            </button>
-            <button onClick={() => handleDeleteCanvas(canvas.id)}>
-              <TiDeleteOutline />
-            </button>
-          </li>
-        ))}
+        <div className="canvas-container-name-delete">
+          {canvasList.map((canvas) => (
+            <li key={canvas.id}>
+              <button
+                className="name-button"
+                onClick={() => handleSelectCanvas(canvas.id)}
+              >
+                {canvas.name}
+              </button>
+
+              <button
+                className="delete-button"
+                onClick={() => handleDeleteCanvas(canvas.id)}
+              >
+                <MdDelete />
+              </button>
+            </li>
+          ))}
+        </div>
       </ul>
-      <button onClick={handleSaveCanvas}>Save Current Canvas</button>
+      <div className="current-canvas-container">
+        <p className="current-canvas">Canvas:</p>
+        <p className="current-canvas-name">{currentCanvasName}</p>
+      </div>
+      <button className="btn" onClick={handleSaveCanvas}>Save Canvas</button>
     </div>
   );
 };
