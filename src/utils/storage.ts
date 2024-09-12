@@ -25,7 +25,7 @@ export const saveFlowToLocalForage = async (
     }
 
     await localforage.setItem("canvases", storedCanvases);
-
+alert("canvas saved");
     console.log(`Flow for canvas ${canvasId} (${name}) saved successfully.`);
   } catch (error) {
     console.error(`Error saving flow for canvas ${canvasId}:`, error);

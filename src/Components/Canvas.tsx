@@ -8,7 +8,6 @@ import {
 import { CanvasListProps } from "../types/types";
 import "../Styles/canvas.css";
 import { TiDeleteOutline } from "react-icons/ti";
-
 const CanvasList: React.FC<CanvasListProps> = ({
   onSelectCanvas,
   currentNodes,
@@ -65,6 +64,11 @@ const CanvasList: React.FC<CanvasListProps> = ({
     }
   };
 
+  const handleSelectCanvas = (canvasId: string) => {
+    setSelectedCanvasId(canvasId);
+    onSelectCanvas(canvasId);
+  };
+
   return (
     <div className="canvas-container">
       <input
@@ -77,8 +81,7 @@ const CanvasList: React.FC<CanvasListProps> = ({
       <ul className="list-items">
         {canvasList.map((canvas) => (
           <li key={canvas.id}>
-            <button onClick={() => onSelectCanvas(canvas.id)}>
-              {" "}
+            <button onClick={() => handleSelectCanvas(canvas.id)}>
               {canvas.name}
             </button>
             <button onClick={() => handleDeleteCanvas(canvas.id)}>
