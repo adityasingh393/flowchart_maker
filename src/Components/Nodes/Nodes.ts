@@ -1,7 +1,7 @@
 import { CustomNode, SetNodesFunction } from "../../types/types";
 
 export const createNewNode = (
-  nodes: CustomNode[],
+  _: CustomNode[],
   setNodes: SetNodesFunction,
   shape: "rectangel" | "diamond" | "oval" | "comment"
 ) => {

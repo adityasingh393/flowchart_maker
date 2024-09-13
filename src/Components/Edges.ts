@@ -20,7 +20,7 @@ const useEdges = () => {
       const newEdge = {
         ...edge,
         type: selectedEdgeType,
-        markerEnd: {
+        markerStart: {
           type: MarkerType.ArrowClosed,
           width: 13,
           height: 13,

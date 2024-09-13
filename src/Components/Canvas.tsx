@@ -75,7 +75,7 @@ const CanvasList: React.FC<CanvasListProps> = ({
       if (selectedCanvasId) {
         handleSaveCanvas();
       }
-    }, 5000);
+    }, 1000);
     return () => clearInterval(autosaveInterval);
   }, [selectedCanvasId, currentNodes, currentEdges, canvasList]);
 

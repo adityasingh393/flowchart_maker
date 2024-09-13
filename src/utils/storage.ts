@@ -25,8 +25,6 @@ export const saveFlowToLocalForage = async (
     }
 
     await localforage.setItem("canvases", storedCanvases);
-alert("canvas saved");
-    console.log(`Flow for canvas ${canvasId} (${name}) saved successfully.`);
   } catch (error) {
     console.error(`Error saving flow for canvas ${canvasId}:`, error);
   }
@@ -68,7 +66,6 @@ export const removeCanvasFromLocalForage = async (
     );
 
     await localforage.setItem("canvases", updatedCanvases);
-    console.log(`Canvas ${canvasId} removed successfully.`);
   } catch (error) {
     console.error(`Error removing canvas ${canvasId}:`, error);
   }
