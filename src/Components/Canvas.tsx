@@ -22,15 +22,13 @@ const CanvasList: React.FC<CanvasListProps> = ({
   const [newCanvasName, setNewCanvasName] = useState<string>("");
   const [currentCanvasName, setCurrentCanvasName] =
     useState<string>("None Selected");
-
   useEffect(() => {
     const loadCanvases = async () => {
       const storedCanvases = await loadCanvasListFromLocalForage();
-      console.log(storedCanvases);
       setCanvasList(
         storedCanvases.map((canvas) => ({
           id: canvas.canvasId,
-          name: canvas.name || canvas.canvasId,
+          name: canvas.name,
         }))
       );
     };
@@ -43,6 +41,7 @@ const CanvasList: React.FC<CanvasListProps> = ({
     const newCanvas = { id: newCanvasId, name: newCanvasName };
     setCanvasList([...canvasList, newCanvas]);
     setSelectedCanvasId(newCanvasId);
+    setCurrentCanvasName(newCanvas.name);
     onSelectCanvas(newCanvasId);
     setNewCanvasName("");
   };
@@ -52,33 +51,41 @@ const CanvasList: React.FC<CanvasListProps> = ({
     setCanvasList(canvasList.filter((canvas) => canvas.id !== canvasId));
     if (selectedCanvasId === canvasId) {
       setSelectedCanvasId(null);
+      setCurrentCanvasName("None Selected");
     }
   };
-
   const handleSaveCanvas = () => {
     if (selectedCanvasId) {
       const canvasName =
         canvasList.find((canvas) => canvas.id === selectedCanvasId)?.name ||
         "Untitled Canvas";
-      saveFlowToLocalForage(
-        selectedCanvasId,
-        canvasName,
-        currentNodes,
-        currentEdges
-      );
+      if (canvasName) {
+        saveFlowToLocalForage(
+          selectedCanvasId,
+          canvasName,
+          currentNodes,
+          currentEdges
+        );
+      }
     }
   };
 
-  const handleSelectCanvas = (canvasId: string) => {
-    setSelectedCanvasId(canvasId);
-    canvasList.map((canvas) => {
-      if (canvas.id === canvasId) {
-        setCurrentCanvasName(canvas.name);
-        return;
+  useEffect(() => {
+    const autosaveInterval = setInterval(() => {
+      if (selectedCanvasId) {
+        handleSaveCanvas();
       }
-    });
+    }, 5000);
+    return () => clearInterval(autosaveInterval);
+  }, [selectedCanvasId, currentNodes, currentEdges, canvasList]);
 
-    onSelectCanvas(canvasId);
+  const handleSelectCanvas = (canvasId: string) => {
+    const selectedCanvas = canvasList.find((canvas) => canvas.id === canvasId);
+    if (selectedCanvas) {
+      setCurrentCanvasName(selectedCanvas.name);
+      setSelectedCanvasId(canvasId);
+      onSelectCanvas(canvasId);
+    }
   };
 
   return (
@@ -102,9 +109,8 @@ const CanvasList: React.FC<CanvasListProps> = ({
                 className="name-button"
                 onClick={() => handleSelectCanvas(canvas.id)}
               >
-                {canvas.name}
+                {canvas.name || "Untitled Canvas"}
               </button>
-
               <button
                 className="delete-button"
                 onClick={() => handleDeleteCanvas(canvas.id)}
@@ -119,7 +125,9 @@ const CanvasList: React.FC<CanvasListProps> = ({
         <p className="current-canvas">Canvas:</p>
         <p className="current-canvas-name">{currentCanvasName}</p>
       </div>
-      <button className="btn" onClick={handleSaveCanvas}>Save Canvas</button>
+      <button className="btn" onClick={handleSaveCanvas}>
+        Save Canvas
+      </button>
     </div>
   );
 };
