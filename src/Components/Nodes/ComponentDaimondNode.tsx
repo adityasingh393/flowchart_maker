@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Position, NodeResizer, Handle } from "@xyflow/react";
-import { CustomNodeProp } from "../../types/types";
+import { CustomNodeProp } from "../../types";
 
-const CustomRhombusNode = ({  data, selected }: CustomNodeProp) => {
+const CustomRhombusNode = ({ data, selected }: CustomNodeProp) => {
   const [label, setLabel] = useState(data.label);
 
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const newLabel=e.target.value;
-  setLabel(newLabel);
-  data.label=newLabel;
+    const newLabel = e.target.value;
+    setLabel(newLabel);
+    data.label = newLabel;
   };
 
   return (

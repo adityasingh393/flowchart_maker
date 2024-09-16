@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { DrawerProps } from "../types/types";
-import "../Styles/drawer.css";
+import { DrawerProps } from "../../types";
+import "./drawer.css";
 import { LuRectangleHorizontal } from "react-icons/lu";
 import { TbOvalVertical } from "react-icons/tb";
 import { BsSuitDiamond } from "react-icons/bs";
@@ -9,7 +9,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { TbArrowCurveRight } from "react-icons/tb";
 import { PiStepsLight } from "react-icons/pi";
 import { PiSteps } from "react-icons/pi";
-import CanvasList from "./Canvas";
+import CanvasList from "../ComponentCanvas/Canvas";
 
 const Drawer: React.FC<DrawerProps> = ({
   onAddDefaultNode,

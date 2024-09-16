@@ -1,4 +1,4 @@
-import { CustomNode, SetNodesFunction } from "../../types/types";
+import { CustomNode, SetNodesFunction } from "../../types";
 
 export const createNewNode = (
   _: CustomNode[],

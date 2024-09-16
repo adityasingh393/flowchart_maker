@@ -1,12 +1,12 @@
 import React from "react";
-import Flow from "./Components/Flow";
-import "./App.css";
+//move to screens/pages folder
+import Flow from "./Screens/ScreenFlow/Flow";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    // remove div and className if there is no use of it
+
       <Flow />
-    </div>
   );
 };
 

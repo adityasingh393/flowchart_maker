@@ -4,9 +4,9 @@ import {
   saveFlowToLocalForage,
   loadCanvasListFromLocalForage,
   removeCanvasFromLocalForage,
-} from "../utils/storage";
-import { CanvasListProps } from "../types/types";
-import "../Styles/canvas.css";
+} from "../../utils/storage";
+import { CanvasListProps } from "../../types";
+import "./canvas.css";
 import { MdDelete } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 
