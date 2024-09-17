@@ -1,11 +1,11 @@
 import { CustomNode, SetNodesFunction } from "../../types";
-
+import { v4 as uuidv4 } from "uuid";
 export const createNewNode = (
   _: CustomNode[],
   setNodes: SetNodesFunction,
   shape: "rectangel" | "diamond" | "oval" | "comment"
 ) => {
-  const newNodeId = Date.now().toString();
+  const newNodeId = uuidv4();
 
   let newNode: CustomNode;
 
@@ -76,7 +76,7 @@ export const createNewNode = (
       };
       break;
     default:
-     alert("unkown shape has been selelcted")
+      alert("unkown shape has been selelcted");
   }
 
   setNodes((nds) => [...nds, newNode]);
