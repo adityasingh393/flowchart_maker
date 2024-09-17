@@ -12,15 +12,14 @@ export const saveFlowToLocalForage = async (
     const storedCanvases =
       (await localforage.getItem<CanvasData[]>("canvases")) || [];
 
-    let canvasExists = false;
-    for (let i = 0; i < storedCanvases.length; i++) {
-      if (storedCanvases[i].canvasId === canvasId) {
-        storedCanvases[i] = newCanvasData;
-        canvasExists = true;
-        break;
-      }
-    }
-    if (!canvasExists) {
+    const existingCanvas = storedCanvases.find(
+      (canvas) => canvas.canvasId === canvasId
+    );
+    if (existingCanvas) {
+      existingCanvas.name = name;
+      existingCanvas.nodes = nodes;
+      existingCanvas.edges = edges;
+    } else {
       storedCanvases.push(newCanvasData);
     }
 
@@ -29,6 +28,7 @@ export const saveFlowToLocalForage = async (
     console.error(`Error saving flow for canvas ${canvasId}:`, error);
   }
 };
+
 export const loadFlowFromLocalForage = async (
   canvasId: string
 ): Promise<{ name: string; nodes: CustomNode[]; edges: Edge[] }> => {

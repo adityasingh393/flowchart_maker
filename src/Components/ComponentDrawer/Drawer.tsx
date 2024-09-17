@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DrawerProps } from "../../types";
+import { DrawerProps ,  NodeEdgeOption} from "../../types";
 import "./drawer.css";
 import { LuRectangleHorizontal } from "react-icons/lu";
 import { TbOvalVertical } from "react-icons/tb";
@@ -11,6 +11,27 @@ import { PiStepsLight } from "react-icons/pi";
 import { PiSteps } from "react-icons/pi";
 import CanvasList from "../ComponentCanvas/Canvas";
 
+const getNodeOptions = (
+  onAddDefaultNode: () => void,
+  onAddCircleNode: () => void,
+  onAddDiamondNode: () => void,
+  onAddCommentNode: () => void
+): NodeEdgeOption[] => [
+  { onClick: onAddDefaultNode, icon: <LuRectangleHorizontal />, label: "Default Node" },
+  { onClick: onAddCircleNode, icon: <TbOvalVertical />, label: "Circle Node" },
+  { onClick: onAddDiamondNode, icon: <BsSuitDiamond />, label: "Diamond Node" },
+  { onClick: onAddCommentNode, icon: <FaRegCommentAlt />, label: "Comment Node" },
+];
+
+const getEdgeOptions = (
+  onEdgeTypeChange: (type: "default" | "straight" | "step" | "smoothstep") => void
+): NodeEdgeOption[] => [
+  { onClick: () => onEdgeTypeChange("default"), icon: <TbArrowCurveRight />, label: "Default Edge" },
+  { onClick: () => onEdgeTypeChange("straight"), icon: <FaArrowRightLong />, label: "Straight Edge" },
+  { onClick: () => onEdgeTypeChange("step"), icon: <PiStepsLight />, label: "Step Edge" },
+  { onClick: () => onEdgeTypeChange("smoothstep"), icon: <PiSteps />, label: "Smooth Step Edge" },
+];
+
 const Drawer: React.FC<DrawerProps> = ({
   onAddDefaultNode,
   onAddCircleNode,
@@ -21,22 +42,24 @@ const Drawer: React.FC<DrawerProps> = ({
   edges,
   onCanvasSelect,
 }) => {
-  const [isNodesOpen, setNodesOpen] = useState(false);
-  const [isEdgesOpen, setEdgesOpen] = useState(false);
+  const [isNodesOpen, setNodesOpen] = useState<boolean>(false);
+  const [isEdgesOpen, setEdgesOpen] = useState<boolean>(false);
 
   const handleEdgesClick = () => {
     setEdgesOpen(!isEdgesOpen);
     if (isNodesOpen) {
-      setNodesOpen(!isNodesOpen);
+      setNodesOpen(false);
     }
   };
 
   const handleNodesClick = () => {
     setNodesOpen(!isNodesOpen);
     if (isEdgesOpen) {
-      setEdgesOpen(!isEdgesOpen);
+      setEdgesOpen(false);
     }
   };
+  const nodeOptions = getNodeOptions(onAddDefaultNode, onAddCircleNode, onAddDiamondNode, onAddCommentNode);
+  const edgeOptions = getEdgeOptions(onEdgeTypeChange);
 
   return (
     <div className="drawer">
@@ -52,18 +75,11 @@ const Drawer: React.FC<DrawerProps> = ({
           </button>
           {isNodesOpen && (
             <div className="dropdown-menu">
-              <button onClick={onAddDefaultNode}>
-                <LuRectangleHorizontal /> Default Node
-              </button>
-              <button onClick={onAddCircleNode}>
-                <TbOvalVertical /> Circle Node
-              </button>
-              <button onClick={onAddDiamondNode}>
-                <BsSuitDiamond /> Diamond Node
-              </button>
-              <button onClick={onAddCommentNode}>
-                <FaRegCommentAlt /> Comment Node
-              </button>
+              {nodeOptions.map(({ onClick, icon, label }) => (
+                <button key={label} onClick={onClick}>
+                  {icon} {label}
+                </button>
+              ))}
             </div>
           )}
         </div>
@@ -73,19 +89,11 @@ const Drawer: React.FC<DrawerProps> = ({
           </button>
           {isEdgesOpen && (
             <div className="dropdown-menu">
-              <button onClick={() => onEdgeTypeChange("default")}>
-                <TbArrowCurveRight />
-                Default Edge
-              </button>
-              <button onClick={() => onEdgeTypeChange("straight")}>
-                <FaArrowRightLong /> Straight Edge
-              </button>
-              <button onClick={() => onEdgeTypeChange("step")}>
-                <PiStepsLight /> Step Edge
-              </button>
-              <button onClick={() => onEdgeTypeChange("smoothstep")}>
-                <PiSteps /> Smooth Step Edge
-              </button>
+              {edgeOptions.map(({ onClick, icon, label }) => (
+                <button key={label} onClick={onClick}>
+                  {icon} {label}
+                </button>
+              ))}
             </div>
           )}
         </div>

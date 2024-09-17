@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Background, Controls, useNodesState, ReactFlow } from "@xyflow/react";
-//make a sideDrawer folder and place it
 import Drawer from "../../Components/ComponentDrawer/Drawer";
-//./Nodes
-import { handleAddNode } from "../../Components/Nodes";
+import { handleAddNode } from "../../Components/ComponentNodes/CreateNode";
 //move to hook folder
-import useEdges from "../../Components/Edges";
+import useEdges from "../../customHooks/useEdges";
 import { loadFlowFromLocalForage } from "../../utils/storage";
 import "./flow.css";
 import "@xyflow/react/dist/style.css";
-//add a prefix like ComponentDaimondNode
-import DiamondNode from "../../Components/Nodes/ComponentDaimondNode";
-import CircularNode from "../../Components/Nodes/ComponentCircularNode";
-import CommentNode from "../../Components/Nodes/ComponentComment";
-import ReactangularNode from "../../Components/Nodes/ComponentReactangularNode";
+//Better import
 import { CustomNode } from "../../types";
-
+import { a } from "../../utils/constant";
+import {
+  CircularNode,
+  CommentNode,
+  DiamondNode,
+  ReactangularNode,
+} from "../../Components/ComponentNodes";
 const initialNodes: CustomNode[] = [];
 
 const Flow: React.FC = () => {
@@ -44,7 +44,8 @@ const Flow: React.FC = () => {
     }));
     setNodes(updatedNodes);
   };
-  const a = "a";
+  //move it in a constant file
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       //make constant and move a there

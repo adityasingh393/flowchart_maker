@@ -3,6 +3,8 @@ import { useState } from "react";
 import { CustomNodeProp } from "../../types";
 
 const ReactangularNode = ({ data, selected }: CustomNodeProp) => {
+ 
+ //make a hook for this
   const [label, setLabel] = useState(data.label);
   const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newLabel = e.target.value;
