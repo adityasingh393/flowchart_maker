@@ -1,19 +1,17 @@
 import { NodeResizer } from "@xyflow/react";
-import { useState } from "react";
 import { CustomNodeProp } from "../../types";
+import useInput from "../../customHooks/useInput";
 const CommentNode = ({ data, selected }: CustomNodeProp) => {
-  const [label, setLabel] = useState(data.label);
-  const handleLabelChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newLabel = e.target.value;
-    setLabel(newLabel);
-    data.label = newLabel;
-  };
+  const {labelValue, handleChange}=useInput(data.label);
   return (
     <>
       <NodeResizer minHeight={40} minWidth={75} isVisible={selected} />
       <textarea
-        value={label}
-        onChange={handleLabelChange}
+        value={labelValue}
+        onChange={(e)=>{
+          const updatedLabel=handleChange(e);
+          data.label=updatedLabel;
+        }}
         style={{
           border: "none",
           textAlign: "center",

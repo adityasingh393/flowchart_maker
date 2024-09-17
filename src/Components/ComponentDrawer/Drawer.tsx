@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DrawerProps ,  NodeEdgeOption} from "../../types";
+import { DrawerProps, NodeEdgeOption } from "../../types";
 import "./drawer.css";
 import { LuRectangleHorizontal } from "react-icons/lu";
 import { TbOvalVertical } from "react-icons/tb";
@@ -10,26 +10,52 @@ import { TbArrowCurveRight } from "react-icons/tb";
 import { PiStepsLight } from "react-icons/pi";
 import { PiSteps } from "react-icons/pi";
 import CanvasList from "../ComponentCanvas/Canvas";
-
+import { edgeText,  nodeText } from "../../utils/translation";
 const getNodeOptions = (
   onAddDefaultNode: () => void,
   onAddCircleNode: () => void,
   onAddDiamondNode: () => void,
   onAddCommentNode: () => void
 ): NodeEdgeOption[] => [
-  { onClick: onAddDefaultNode, icon: <LuRectangleHorizontal />, label: "Default Node" },
+  {
+    onClick: onAddDefaultNode,
+    icon: <LuRectangleHorizontal />,
+    label: "Default Node",
+  },
   { onClick: onAddCircleNode, icon: <TbOvalVertical />, label: "Circle Node" },
   { onClick: onAddDiamondNode, icon: <BsSuitDiamond />, label: "Diamond Node" },
-  { onClick: onAddCommentNode, icon: <FaRegCommentAlt />, label: "Comment Node" },
+  {
+    onClick: onAddCommentNode,
+    icon: <FaRegCommentAlt />,
+    label: "Comment Node",
+  },
 ];
 
 const getEdgeOptions = (
-  onEdgeTypeChange: (type: "default" | "straight" | "step" | "smoothstep") => void
+  onEdgeTypeChange: (
+    type: "default" | "straight" | "step" | "smoothstep"
+  ) => void
 ): NodeEdgeOption[] => [
-  { onClick: () => onEdgeTypeChange("default"), icon: <TbArrowCurveRight />, label: "Default Edge" },
-  { onClick: () => onEdgeTypeChange("straight"), icon: <FaArrowRightLong />, label: "Straight Edge" },
-  { onClick: () => onEdgeTypeChange("step"), icon: <PiStepsLight />, label: "Step Edge" },
-  { onClick: () => onEdgeTypeChange("smoothstep"), icon: <PiSteps />, label: "Smooth Step Edge" },
+  {
+    onClick: () => onEdgeTypeChange("default"),
+    icon: <TbArrowCurveRight />,
+    label: "Default Edge",
+  },
+  {
+    onClick: () => onEdgeTypeChange("straight"),
+    icon: <FaArrowRightLong />,
+    label: "Straight Edge",
+  },
+  {
+    onClick: () => onEdgeTypeChange("step"),
+    icon: <PiStepsLight />,
+    label: "Step Edge",
+  },
+  {
+    onClick: () => onEdgeTypeChange("smoothstep"),
+    icon: <PiSteps />,
+    label: "Smooth Step Edge",
+  },
 ];
 
 const Drawer: React.FC<DrawerProps> = ({
@@ -58,7 +84,12 @@ const Drawer: React.FC<DrawerProps> = ({
       setEdgesOpen(false);
     }
   };
-  const nodeOptions = getNodeOptions(onAddDefaultNode, onAddCircleNode, onAddDiamondNode, onAddCommentNode);
+  const nodeOptions = getNodeOptions(
+    onAddDefaultNode,
+    onAddCircleNode,
+    onAddDiamondNode,
+    onAddCommentNode
+  );
   const edgeOptions = getEdgeOptions(onEdgeTypeChange);
 
   return (
@@ -71,7 +102,7 @@ const Drawer: React.FC<DrawerProps> = ({
       <div className="button">
         <div className="dropdown">
           <button className="dropdown-button" onClick={handleNodesClick}>
-            Nodes
+            {nodeText}
           </button>
           {isNodesOpen && (
             <div className="dropdown-menu">
@@ -85,7 +116,7 @@ const Drawer: React.FC<DrawerProps> = ({
         </div>
         <div className="dropdown">
           <button className="dropdown-button" onClick={handleEdgesClick}>
-            Edges
+            {edgeText}
           </button>
           {isEdgesOpen && (
             <div className="dropdown-menu">

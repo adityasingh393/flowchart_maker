@@ -1,15 +1,9 @@
-import React, { useState } from "react";
 import { Position, NodeResizer, Handle } from "@xyflow/react";
 import { CustomNodeProp } from "../../types";
+import useInput from "../../customHooks/useInput";
 
 const CustomRhombusNode = ({ data, selected }: CustomNodeProp) => {
-  const [label, setLabel] = useState(data.label);
-
-  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newLabel = e.target.value;
-    setLabel(newLabel);
-    data.label = newLabel;
-  };
+  const {labelValue, handleChange} = useInput(data.label);
 
   return (
     <div
@@ -29,8 +23,11 @@ const CustomRhombusNode = ({ data, selected }: CustomNodeProp) => {
     >
       <input
         type="text"
-        value={label}
-        onChange={handleLabelChange}
+        value={labelValue}
+        onChange={(e) => {
+          const updatedLabel = handleChange(e);
+          data.label = updatedLabel;
+        }}
         style={{
           border: "none",
           backgroundColor: "transparent",

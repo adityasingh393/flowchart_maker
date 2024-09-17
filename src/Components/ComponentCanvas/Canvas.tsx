@@ -9,6 +9,7 @@ import { CanvasListProps } from "../../types";
 import "./canvas.css";
 import { MdDelete } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
+import { canvasText, saveCanvasText } from "../../utils/translation";
 
 const CanvasList: React.FC<CanvasListProps> = ({
   onSelectCanvas,
@@ -122,11 +123,11 @@ const CanvasList: React.FC<CanvasListProps> = ({
         </div>
       </ul>
       <div className="current-canvas-container">
-        <p className="current-canvas">Canvas:</p>
+        <p className="current-canvas">{canvasText}:</p>
         <p className="current-canvas-name">{currentCanvasName}</p>
       </div>
       <button className="btn" onClick={handleSaveCanvas}>
-        Save Canvas
+        {saveCanvasText} 
       </button>
     </div>
   );

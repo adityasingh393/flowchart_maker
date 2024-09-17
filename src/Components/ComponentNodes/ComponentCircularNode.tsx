@@ -1,14 +1,9 @@
 import { Handle, NodeResizer, Position } from "@xyflow/react";
-import { useState } from "react";
-import { CustomNodeProp } from "../../types";
-const CircularNode = ({ data, selected }: CustomNodeProp) => {
-  const [label, setLabel] = useState(data.label);
 
-  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newLabel = e.target.value;
-    setLabel(newLabel);
-    data.label = newLabel;
-  };
+import { CustomNodeProp } from "../../types";
+import useInput from "../../customHooks/useInput";
+const CircularNode = ({ data, selected }: CustomNodeProp) => {
+  const { labelValue, handleChange } = useInput(data.label);
   return (
     <>
       <NodeResizer
@@ -27,8 +22,11 @@ const CircularNode = ({ data, selected }: CustomNodeProp) => {
       />
       <input
         type="text"
-        value={label}
-        onChange={handleLabelChange}
+        value={labelValue}
+        onChange={(e) => {
+          const updatedLabel = handleChange(e);
+          data.label = updatedLabel;
+        }}
         style={{
           border: "none",
           textAlign: "center",
