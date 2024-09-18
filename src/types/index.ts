@@ -54,3 +54,9 @@ export type NodeEdgeOption = {
   label: string;
 };
 
+export interface InputFieldProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  style?: React.CSSProperties;
+}

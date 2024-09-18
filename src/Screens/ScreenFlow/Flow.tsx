@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Background, Controls, useNodesState, ReactFlow } from "@xyflow/react";
 import Drawer from "../../Components/ComponentDrawer/Drawer";
 import { handleAddNode } from "../../Components/ComponentNodes/CreateNode";
-//move to hook folder
 import useEdges from "../../customHooks/useEdges";
 import { loadFlowFromLocalForage } from "../../utils/storage";
 import "./flow.css";
 import "@xyflow/react/dist/style.css";
-//Better import
 import { CustomNode } from "../../types";
 import { a } from "../../utils/constant";
 import {

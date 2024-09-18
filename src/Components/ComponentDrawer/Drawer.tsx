@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { DrawerProps, NodeEdgeOption } from "../../types";
 import "./drawer.css";
-import { LuRectangleHorizontal } from "react-icons/lu";
-import { TbOvalVertical } from "react-icons/tb";
-import { BsSuitDiamond } from "react-icons/bs";
-import { FaRegCommentAlt } from "react-icons/fa";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { TbArrowCurveRight } from "react-icons/tb";
-import { PiStepsLight } from "react-icons/pi";
-import { PiSteps } from "react-icons/pi";
+import {
+  BsSuitDiamond,
+  TbOvalVertical,
+  LuRectangleHorizontal,
+  FaRegCommentAlt,
+  FaArrowRightLong,
+  TbArrowCurveRight,
+  PiStepsLight,
+  PiSteps,
+} from "../../utils/icons";
 import CanvasList from "../ComponentCanvas/Canvas";
-import { edgeText,  nodeText } from "../../utils/translation";
+import { edgeText, nodeText } from "../../utils/translation";
 const getNodeOptions = (
   onAddDefaultNode: () => void,
   onAddCircleNode: () => void,

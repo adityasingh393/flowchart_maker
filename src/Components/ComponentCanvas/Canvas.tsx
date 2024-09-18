@@ -7,9 +7,9 @@ import {
 } from "../../utils/storage";
 import { CanvasListProps } from "../../types";
 import "./canvas.css";
-import { MdDelete } from "react-icons/md";
-import { IoMdAdd } from "react-icons/io";
+import { MdDelete, IoMdAdd } from "../../utils/icons";
 import { canvasText, saveCanvasText } from "../../utils/translation";
+import InputField from "../CommonComponents/ComponentInput";
 
 const CanvasList: React.FC<CanvasListProps> = ({
   onSelectCanvas,
@@ -92,11 +92,16 @@ const CanvasList: React.FC<CanvasListProps> = ({
   return (
     <div className="canvas-container">
       <div className="add-container">
-        <input
-          type="text"
+        <InputField
           placeholder="Enter canvas name"
           value={newCanvasName}
           onChange={(e) => setNewCanvasName(e.target.value)}
+          style={{
+            fontWeight:"lighter",
+            fontSize:"100%",
+            color:"black",
+            border:"1px solid black"
+          }}
         />
         <button className="add-button" onClick={handleAddCanvas}>
           <IoMdAdd />
@@ -127,7 +132,7 @@ const CanvasList: React.FC<CanvasListProps> = ({
         <p className="current-canvas-name">{currentCanvasName}</p>
       </div>
       <button className="btn" onClick={handleSaveCanvas}>
-        {saveCanvasText} 
+        {saveCanvasText}
       </button>
     </div>
   );

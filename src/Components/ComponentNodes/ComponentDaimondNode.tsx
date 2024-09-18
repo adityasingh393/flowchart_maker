@@ -1,9 +1,10 @@
 import { Position, NodeResizer, Handle } from "@xyflow/react";
 import { CustomNodeProp } from "../../types";
 import useInput from "../../customHooks/useInput";
+import InputField from "../CommonComponents/ComponentInput";
 
 const CustomRhombusNode = ({ data, selected }: CustomNodeProp) => {
-  const {labelValue, handleChange} = useInput(data.label);
+  const { labelValue, handleChange } = useInput(data.label);
 
   return (
     <div
@@ -21,22 +22,15 @@ const CustomRhombusNode = ({ data, selected }: CustomNodeProp) => {
         boxSizing: "border-box",
       }}
     >
-      <input
-        type="text"
+      <InputField
         value={labelValue}
         onChange={(e) => {
           const updatedLabel = handleChange(e);
           data.label = updatedLabel;
         }}
         style={{
-          border: "none",
-          backgroundColor: "transparent",
-          textAlign: "center",
-          outline: "none",
           width: "95%",
           height: "95%",
-          color: "green",
-          fontSize: "160%",
           transform: "rotate(-45deg)",
         }}
       />
